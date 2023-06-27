@@ -1,22 +1,30 @@
 plugins {
-    kotlin("jvm") version "1.8.21"
+    alias(libs.plugins.kotlin.jvm) apply true
 }
 
-group = "io.mboettger"
-version = "1.0-SNAPSHOT"
+allprojects {
+    group = "io.mboettger"
+    version = "1.0.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+    repositories {
+        mavenCentral()
+    }
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
+subprojects {
+    apply(plugin = rootProject.libs.plugins.kotlin.jvm.get().pluginId)
 
-tasks.test {
-    useJUnitPlatform()
-}
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
-kotlin {
-    jvmToolchain(11)
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict", "-Xcontext-receivers")
+            jvmTarget = "17"
+        }
+    }
+
+    dependencies {
+        implementation(platform(rootProject.libs.bom.spring.boot))
+
+        implementation(rootProject.libs.bundles.kotlin)
+    }
 }

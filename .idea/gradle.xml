@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/persistence" />
+            <option value="$PROJECT_DIR$/persistence-boundary" />
+            <option value="$PROJECT_DIR$/persistence/memory" />
+            <option value="$PROJECT_DIR$/starter" />
+            <option value="$PROJECT_DIR$/usecase" />
+            <option value="$PROJECT_DIR$/usecase-boundary" />
+            <option value="$PROJECT_DIR$/web" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
