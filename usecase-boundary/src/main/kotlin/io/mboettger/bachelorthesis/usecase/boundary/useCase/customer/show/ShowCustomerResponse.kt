@@ -12,7 +12,7 @@ sealed class ShowCustomerResponse(
 ) : UseCaseResponse<ShowCustomerResponse.Error> {
     data class Success(
         val customer: CustomerModel
-    )
+    ) : ShowCustomerResponse(success = true)
 
     sealed class Error(
         override val message: String

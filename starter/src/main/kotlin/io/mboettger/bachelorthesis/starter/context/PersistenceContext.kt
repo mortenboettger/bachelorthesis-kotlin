@@ -21,9 +21,7 @@ internal open class PersistenceContext(private val env: Environment) {
     }
 
     @Bean
-    open fun gatewayFactory(): GatewayFactory {
-        return MemoryGatewayFactoryImpl(properties).apply {
-            migrate()
-        }
+    open fun gatewayFactory(): GatewayFactory = MemoryGatewayFactoryImpl(properties).apply {
+        migrate()
     }
 }
