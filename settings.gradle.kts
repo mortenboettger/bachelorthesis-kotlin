@@ -26,6 +26,7 @@ dependencyResolutionManagement {
 
             // spring boot
             library("spring-boot-starter", "org.springframework.boot", "spring-boot-starter").withoutVersion()
+            library("spring-boot-web", "org.springframework.boot","spring-boot-starter-web").withoutVersion()
 
             // persistence mysql
             library("persistence-hikari", "org.hibernate.orm", "hibernate-hikaricp").versionRef("hikari")
