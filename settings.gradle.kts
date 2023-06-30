@@ -36,6 +36,12 @@ dependencyResolutionManagement {
             // persistence memory
             library("persistence-h2", "com.h2database", "h2").versionRef("h2")
 
+            // jackson
+            library("jackson-jsr310", "com.fasterxml.jackson.datatype", "jackson-datatype-jsr310").withoutVersion()
+            library("jackson-kotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
+            library("jackson-databind", "com.fasterxml.jackson.core", "jackson-databind").withoutVersion()
+            library("jackson-core", "com.fasterxml.jackson.core", "jackson-core").withoutVersion()
+
             // #################
             // bundles
             // #################
@@ -52,4 +58,4 @@ pluginManagement {
     }
 }
 
-include(":starter", ":domain", ":usecase", ":usecase-boundary", ":persistence-boundary", ":persistence:memory", ":web")
+include(":starter", ":domain", ":usecase:impl", ":usecase:boundary", ":persistence:gateway", ":persistence:memory", ":web")

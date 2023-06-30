@@ -1,6 +1,6 @@
 package io.mboettger.bachelorthesis.starter.context
 
-import io.mboettger.bachelorthesis.persistence.boundary.GatewayFactory
+import io.mboettger.bachelorthesis.persistence.gateway.GatewayFactory
 import io.mboettger.bachelorthesis.persistence.memory.MemoryGatewayFactoryImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

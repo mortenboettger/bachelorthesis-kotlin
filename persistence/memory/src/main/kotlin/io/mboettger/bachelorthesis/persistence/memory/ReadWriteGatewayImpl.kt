@@ -1,7 +1,7 @@
 package io.mboettger.bachelorthesis.persistence.memory
 
 import io.mboettger.bachelorthesis.domain.DomainModel
-import io.mboettger.bachelorthesis.persistence.boundary.ReadWriteGateway
+import io.mboettger.bachelorthesis.persistence.gateway.ReadWriteGateway
 import io.mboettger.bachelorthesis.persistence.memory.entity.EntityModel
 import jakarta.persistence.EntityManager
 import jakarta.persistence.EntityNotFoundException

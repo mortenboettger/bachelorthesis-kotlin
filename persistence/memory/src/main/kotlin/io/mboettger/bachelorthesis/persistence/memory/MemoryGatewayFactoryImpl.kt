@@ -1,8 +1,8 @@
 package io.mboettger.bachelorthesis.persistence.memory
 
-import io.mboettger.bachelorthesis.persistence.boundary.CustomerGateway
-import io.mboettger.bachelorthesis.persistence.boundary.Gateway
-import io.mboettger.bachelorthesis.persistence.boundary.GatewayFactory
+import io.mboettger.bachelorthesis.persistence.gateway.CustomerGateway
+import io.mboettger.bachelorthesis.persistence.gateway.Gateway
+import io.mboettger.bachelorthesis.persistence.gateway.GatewayFactory
 import jakarta.persistence.EntityManager
 import jakarta.persistence.EntityManagerFactory
 import jakarta.persistence.Persistence

@@ -2,7 +2,7 @@ package io.mboettger.bachelorthesis.persistence.memory
 
 import io.mboettger.bachelorthesis.domain.customer.*
 import io.mboettger.bachelorthesis.domain.customer.address.*
-import io.mboettger.bachelorthesis.persistence.boundary.CustomerGateway
+import io.mboettger.bachelorthesis.persistence.gateway.CustomerGateway
 import io.mboettger.bachelorthesis.persistence.memory.entity.CustomerEntity
 import jakarta.persistence.EntityManager
 import jakarta.persistence.criteria.Path

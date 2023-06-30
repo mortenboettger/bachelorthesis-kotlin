@@ -2,8 +2,7 @@ package io.mboettger.bachelorthesis.web.model
 
 import java.io.Serializable
 
-data class CustomerResponseV1(
-    val id: String,
+data class CreateCustomerRequestV1(
     val name: String,
     val surName: String,
     val address: AddressV1,

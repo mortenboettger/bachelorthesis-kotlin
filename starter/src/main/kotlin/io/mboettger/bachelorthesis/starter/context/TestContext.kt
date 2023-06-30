@@ -4,10 +4,8 @@ import io.mboettger.bachelorthesis.domain.customer.Customer
 import io.mboettger.bachelorthesis.domain.customer.Name
 import io.mboettger.bachelorthesis.domain.customer.SurName
 import io.mboettger.bachelorthesis.domain.customer.address.*
-import io.mboettger.bachelorthesis.persistence.boundary.CustomerGateway
-import io.mboettger.bachelorthesis.persistence.boundary.GatewayFactory
-import io.mboettger.bachelorthesis.usecase.boundary.UseCaseFactory
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.customer.create.CreateCustomerUseCase
+import io.mboettger.bachelorthesis.persistence.gateway.CustomerGateway
+import io.mboettger.bachelorthesis.persistence.gateway.GatewayFactory
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
