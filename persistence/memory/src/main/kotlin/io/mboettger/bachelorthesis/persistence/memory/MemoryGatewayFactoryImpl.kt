@@ -39,7 +39,7 @@ class MemoryGatewayFactoryImpl(
 
     private val baseGateways: Map<KClass<out Gateway>, Gateway> by lazy {
         mapOf(
-            CustomerGateway::class to CustomerGatewayImpl(entityManager,sessionFactory)
+            CustomerGateway::class to CustomerGatewayImpl(sessionFactory)
         )
     }
     private val gateways: Map<KClass<out Gateway>, Gateway> = mapOf()

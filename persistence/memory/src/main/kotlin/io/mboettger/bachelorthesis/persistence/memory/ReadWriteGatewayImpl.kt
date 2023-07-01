@@ -3,7 +3,6 @@ package io.mboettger.bachelorthesis.persistence.memory
 import io.mboettger.bachelorthesis.domain.DomainModel
 import io.mboettger.bachelorthesis.persistence.gateway.ReadWriteGateway
 import io.mboettger.bachelorthesis.persistence.memory.entity.EntityModel
-import jakarta.persistence.EntityManager
 import jakarta.persistence.EntityNotFoundException
 import jakarta.persistence.TypedQuery
 import jakarta.persistence.criteria.CriteriaBuilder
@@ -15,7 +14,6 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty0
 
 abstract class ReadWriteGatewayImpl<T : DomainModel, E : EntityModel>(
-    private val entityManager: EntityManager,
     protected val sessionFactory: SessionFactory,
     protected val entityClass: KClass<out E>
 ) : ReadWriteGateway<T> {

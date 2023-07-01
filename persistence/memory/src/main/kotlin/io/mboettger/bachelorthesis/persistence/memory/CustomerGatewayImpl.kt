@@ -4,17 +4,11 @@ import io.mboettger.bachelorthesis.domain.customer.*
 import io.mboettger.bachelorthesis.domain.customer.address.*
 import io.mboettger.bachelorthesis.persistence.gateway.CustomerGateway
 import io.mboettger.bachelorthesis.persistence.memory.entity.CustomerEntity
-import jakarta.persistence.EntityManager
-import jakarta.persistence.criteria.Path
-import jakarta.persistence.criteria.Predicate
 import org.hibernate.SessionFactory
-import java.util.stream.Stream
 
 internal class CustomerGatewayImpl(
-    entityManager: EntityManager,
     sessionFactory: SessionFactory,
 ) : ReadWriteGatewayImpl<Customer, CustomerEntity>(
-    entityManager,
     sessionFactory,
     CustomerEntity::class,
 ), CustomerGateway {
@@ -57,29 +51,5 @@ internal class CustomerGatewayImpl(
                 )
             }
         }.resultList.firstOrNull()?.toDomain()
-    }
-
-    override fun findByAddress(address: Address): Stream<Customer> {
-        return withTransaction {
-            queryWithCriteria {
-                val root = from(entityClass.java)
-                where(
-                    root.get<String>(CustomerEntity::street.name).`in`(address.street.value),
-                    root.get<String>(CustomerEntity::houseNumber.name).`in`(address.houseNumber.value),
-                    root.get<String?>(CustomerEntity::houseNumberAddition.name).isNullOrEquals(address.houseNumberAddition?.value),
-                    root.get<String>(CustomerEntity::postCode.name).`in`(address.postCode.value),
-                    root.get<String>(CustomerEntity::city.name).`in`(address.city.value),
-                    root.get<String?>(CustomerEntity::district.name).isNullOrEquals(address.district?.value),
-                )
-            }
-        }.resultStream.map { it.toDomain() }
-    }
-
-    private fun <T> Path<T>.isNullOrEquals(value: T): Predicate {
-        return if(value == null) {
-            isNull
-        }else {
-            `in`(value)
-        }
     }
 }
