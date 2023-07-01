@@ -6,6 +6,6 @@ import io.mboettger.bachelorthesis.domain.customer.address.Address
 import java.util.stream.Stream
 
 interface CustomerGateway : ReadWriteGateway<Customer> {
-    fun findCustomerByEmail(emailAddress: EmailAddress): Customer?
-    fun findCustomersByAddress(address: Address): Stream<Customer>
+    fun findByEmail(emailAddress: EmailAddress): Customer?
+    fun findByAddress(address: Address): Stream<Customer>
 }

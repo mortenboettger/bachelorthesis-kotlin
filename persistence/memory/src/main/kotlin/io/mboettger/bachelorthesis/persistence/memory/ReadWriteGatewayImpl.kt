@@ -14,7 +14,7 @@ import java.util.stream.Stream
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty0
 
-abstract class ReadWriteGatewayImpl<T: DomainModel, E: EntityModel>(
+abstract class ReadWriteGatewayImpl<T : DomainModel, E : EntityModel>(
     private val entityManager: EntityManager,
     protected val sessionFactory: SessionFactory,
     protected val entityClass: KClass<out E>
@@ -24,7 +24,8 @@ abstract class ReadWriteGatewayImpl<T: DomainModel, E: EntityModel>(
     protected abstract fun E.toDomain(): T
 
     override fun findOne(id: String): T {
-        return findOneOrNull(id) ?: throw EntityNotFoundException("Unable to find a \"${entityClass.simpleName}\" by given id \"$id\"")
+        return findOneOrNull(id)
+            ?: throw EntityNotFoundException("Unable to find a \"${entityClass.simpleName}\" by given id \"$id\"")
     }
 
     override fun findOneOrNull(id: String): T? {
@@ -69,24 +70,23 @@ abstract class ReadWriteGatewayImpl<T: DomainModel, E: EntityModel>(
 
     protected fun <R> Session.queryWithCriteria(callable: CriteriaQuery<E>.() -> CriteriaQuery<R>): TypedQuery<R> {
         return query {
-            @Suppress("UNCHECKED_CAST")
-            callable(createQuery(entityClass.java as Class<E>))
+            @Suppress("UNCHECKED_CAST") callable(createQuery(entityClass.java as Class<E>))
         }
     }
 
     protected fun <T> withTransaction(callable: Session.() -> T): T {
 
         val session = ThreadLocalSessionFactory.getOrCreate(sessionFactory)
-        return if(session.transaction.isActive) {
+        return if (session.transaction.isActive) {
             callable(session)
-        }else {
+        } else {
             session.transaction.begin()
-            try{
+            try {
                 callable(session).also {
                     session.transaction.commit()
                 }
-            }catch (e: Throwable) {
-                if(session.transaction.isActive) {
+            } catch (e: Throwable) {
+                if (session.transaction.isActive) {
                     session.transaction.rollback()
                 }
                 throw e
@@ -95,6 +95,7 @@ abstract class ReadWriteGatewayImpl<T: DomainModel, E: EntityModel>(
     }
 
     protected fun <R> KProperty0<R>.getOrThrow(): R & Any {
-        return get() ?: throw NullPointerException("Unable to get required property $name from object ${entityClass.simpleName} because the persistence layer returned null")
+        return get()
+            ?: throw NullPointerException("Unable to get required property $name from object ${entityClass.simpleName} because the persistence layer returned null")
     }
 }

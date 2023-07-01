@@ -48,7 +48,7 @@ internal class CustomerGatewayImpl(
         phoneNumber = phoneNumber?.let { PhoneNumber(it) },
     )
 
-    override fun findCustomerByEmail(emailAddress: EmailAddress): Customer? {
+    override fun findByEmail(emailAddress: EmailAddress): Customer? {
         return withTransaction {
             queryWithCriteria {
                 val root = from(entityClass.java)
@@ -59,7 +59,7 @@ internal class CustomerGatewayImpl(
         }.resultList.firstOrNull()?.toDomain()
     }
 
-    override fun findCustomersByAddress(address: Address): Stream<Customer> {
+    override fun findByAddress(address: Address): Stream<Customer> {
         return withTransaction {
             queryWithCriteria {
                 val root = from(entityClass.java)

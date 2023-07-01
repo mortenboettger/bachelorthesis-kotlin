@@ -19,7 +19,7 @@ class ShowCustomerUseCaseImpl(
         }
 
         is ShowCustomerRequest.ByEmailAddress -> {
-            customerGateway.findCustomerByEmail(EmailAddress(request.emailAddress))?.let {
+            customerGateway.findByEmail(EmailAddress(request.emailAddress))?.let {
                 ShowCustomerResponse.Success(it.toBoundary())
             } ?: ShowCustomerResponse.Error.NotFound(request.emailAddress)
         }
