@@ -1,5 +1,14 @@
 plugins {
     alias(libs.plugins.kotlin.jvm) apply true
+    alias(libs.plugins.sonarqube) apply true
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "mortenboettger_bachelorthesis-kotlin")
+        property("sonar.organization", "mboettger")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
 
 allprojects {
