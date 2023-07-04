@@ -23,7 +23,7 @@ sealed class ShowCustomerResponse(
 
         class RequestValidationFailed(
             override val validationErrors: ValidationErrors,
-        ) : Error("Invalid request to create a customer"),
+        ) : Error("Invalid request to show a customer"),
             UseCaseValidationErrorContainer
 
         class Unknown(

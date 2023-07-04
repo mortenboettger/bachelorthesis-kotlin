@@ -32,4 +32,5 @@ optionally no primary constructor (inline + val declaration in param list)
 "template strings" (use variables and operations in strings)
 delegation
 named arguments
+type aliasing
  */
