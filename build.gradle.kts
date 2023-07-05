@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm) apply true
     alias(libs.plugins.sonarqube) apply true
+    id("io.gitlab.arturbosch.detekt").version("1.23.0") apply true
 }
 
 sonarqube {
@@ -9,6 +10,10 @@ sonarqube {
         property("sonar.organization", "mboettger")
         property("sonar.host.url", "https://sonarcloud.io")
     }
+}
+
+detekt {
+    source.setFrom("persistence/memory/src/main/kotlin")
 }
 
 allprojects {

@@ -11,6 +11,9 @@ import io.mboettger.bachelorthesis.usecase.impl.useCase._helper.useCase
 class ShowCustomerUseCaseImpl(
     private val customerGateway: CustomerGateway
 ) : ShowCustomerUseCase by useCase({
+
+    // TODO: validation
+
     when (request) {
         is ShowCustomerRequest.ById -> {
             customerGateway.findOneOrNull(request.customerId)?.let {
