@@ -7,6 +7,7 @@ import io.mboettger.bachelorthesis.usecase.boundary.useCase.UseCaseErrorMessageC
 import io.mboettger.bachelorthesis.usecase.boundary.useCase.UseCaseValidationErrorContainer
 import io.mboettger.bachelorthesis.web.presenter.Presenter
 import org.springframework.http.HttpStatus
+import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.HttpServerErrorException
 import kotlin.reflect.KClass
 
@@ -24,7 +25,7 @@ fun <E> E.asInternalServerError(): Nothing where E : UseCaseResponse<E>, E : Use
 }
 
 fun UseCaseValidationErrorContainer.asValidationError(): Nothing {
-    throw HttpServerErrorException(HttpStatus.BAD_REQUEST, validationErrors.toString())
+    throw HttpClientErrorException(HttpStatus.BAD_REQUEST, validationErrors.toString())
 }
 
 fun <E> E.throwWithStatus(status: HttpStatus): Nothing where E : UseCaseResponse<E>, E : UseCaseErrorMessageContainer{

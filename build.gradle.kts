@@ -13,7 +13,15 @@ sonarqube {
 }
 
 detekt {
-    source.setFrom("persistence/memory/src/main/kotlin")
+    source.setFrom(
+        "domain/src/main/kotlin",
+        "persistence/memory/src/main/kotlin",
+        "persistence/gateway/src/main/kotlin",
+        "starter/src/main/kotlin",
+        "usecase/boundary/src/main/kotlin",
+        "usecase/impl/src/main/kotlin",
+        "web/src/main/kotlin",
+    )
 }
 
 allprojects {
