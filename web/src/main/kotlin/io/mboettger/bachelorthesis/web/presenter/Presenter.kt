@@ -2,8 +2,8 @@ package io.mboettger.bachelorthesis.web.presenter
 
 import io.mboettger.bachelorthesis.usecase.boundary.OutputBoundary
 import io.mboettger.bachelorthesis.usecase.boundary.UseCaseResponse
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.UseCaseErrorMessageContainer
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.UseCaseUnknownErrorContainer
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.UseCaseErrorMessageContainer
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.UseCaseUnknownErrorContainer
 import org.springframework.http.HttpStatus
 import org.springframework.web.client.HttpServerErrorException
 import java.lang.ClassCastException

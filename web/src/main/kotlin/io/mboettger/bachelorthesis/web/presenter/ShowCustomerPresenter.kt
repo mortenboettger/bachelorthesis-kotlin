@@ -1,9 +1,9 @@
 package io.mboettger.bachelorthesis.web.presenter
 
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.customer.show.ShowCustomerResponse
-import io.mboettger.bachelorthesis.web._helper.asInternalServerError
-import io.mboettger.bachelorthesis.web._helper.asValidationError
-import io.mboettger.bachelorthesis.web._helper.throwWithStatus
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCustomerResponse
+import io.mboettger.bachelorthesis.web.helper.asInternalServerError
+import io.mboettger.bachelorthesis.web.helper.asValidationError
+import io.mboettger.bachelorthesis.web.helper.throwWithStatus
 import io.mboettger.bachelorthesis.web.converter.toWebV1
 import io.mboettger.bachelorthesis.web.model.CustomerResponseV1
 import org.springframework.http.HttpStatus

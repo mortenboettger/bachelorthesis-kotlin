@@ -4,9 +4,9 @@ import io.mboettger.bachelorthesis.persistence.gateway.GatewayFactory
 import io.mboettger.bachelorthesis.usecase.boundary.InputBoundary
 import io.mboettger.bachelorthesis.usecase.boundary.UseCaseFactory
 import io.mboettger.bachelorthesis.usecase.boundary.UseCaseResponse
-import io.mboettger.bachelorthesis.usecase.boundary.useCase._exception.UseCaseNotFoundException
-import io.mboettger.bachelorthesis.usecase.impl.useCase.UseCases
-import io.mboettger.bachelorthesis.usecase.impl.useCase.customer.customerUseCases
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.exception.UseCaseNotFoundException
+import io.mboettger.bachelorthesis.usecase.impl.usecase.UseCases
+import io.mboettger.bachelorthesis.usecase.impl.usecase.customer.customerUseCases
 import kotlin.reflect.KClass
 
 class UseCaseFactoryImpl(

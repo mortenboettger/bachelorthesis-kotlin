@@ -14,8 +14,8 @@ internal class CustomerGatewayImpl(
 ), CustomerGateway {
     override fun Customer.toEntity() = CustomerEntity(
         id = id.ifBlank { null },
-        name = name.value,
-        surName = surName.value,
+        firstName = firstName.value,
+        lastName = lastName.value,
         street = address.street.value,
         houseNumber = address.houseNumber.value,
         houseNumberAddition = address.houseNumberAddition?.value,
@@ -28,8 +28,8 @@ internal class CustomerGatewayImpl(
 
     override fun CustomerEntity.toDomain() = Customer(
         id = ::id.getOrThrow(),
-        name = Name(name),
-        surName = SurName(surName),
+        firstName = FirstName(firstName),
+        lastName = LastName(lastName),
         address = Address(
             street = Street(street),
             houseNumber = HouseNumber(houseNumber),
@@ -52,4 +52,7 @@ internal class CustomerGatewayImpl(
             }
         }.resultList.firstOrNull()?.toDomain()
     }
+
+    override fun existsByEmail(emailAddress: EmailAddress): Boolean =
+        findByEmail(emailAddress) != null
 }

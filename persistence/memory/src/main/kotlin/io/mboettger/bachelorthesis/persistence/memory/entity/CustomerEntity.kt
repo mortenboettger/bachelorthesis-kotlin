@@ -12,18 +12,18 @@ class CustomerEntity (
     override var id: String? = null,
 
     @get:Column(
-        name = "name",
+        name = "first_name",
         length = 255,
         nullable = false,
     )
-    var name: String = "",
+    var firstName: String = "",
 
     @get:Column(
-        name = "surname",
+        name = "last_name",
         length = 255,
         nullable = false,
     )
-    var surName: String = "",
+    var lastName: String = "",
 
     @get:Column(
         name = "street",

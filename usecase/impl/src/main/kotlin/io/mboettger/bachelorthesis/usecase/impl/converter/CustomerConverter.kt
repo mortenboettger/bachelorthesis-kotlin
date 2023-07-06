@@ -1,12 +1,12 @@
 package io.mboettger.bachelorthesis.usecase.impl.converter
 
 import io.mboettger.bachelorthesis.domain.customer.*
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.customer.model.CustomerModel
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.model.CustomerModel
 
 internal fun CustomerModel.toDomain() = Customer(
     id = id,
-    name = Name(name),
-    surName = SurName(surName),
+    firstName = FirstName(firstName),
+    lastName = LastName(lastName),
     address = address.toDomain(),
     phoneNumber = phoneNumber?.let { PhoneNumber(it) },
     emailAddress = emailAddress?.let { EmailAddress(it) },
@@ -14,8 +14,8 @@ internal fun CustomerModel.toDomain() = Customer(
 
 internal fun Customer.toBoundary() = CustomerModel(
     id = id,
-    name = name.value,
-    surName = surName.value,
+    firstName = firstName.value,
+    lastName = lastName.value,
     address = address.toBoundary(),
     phoneNumber = phoneNumber?.value,
     emailAddress = emailAddress?.value,

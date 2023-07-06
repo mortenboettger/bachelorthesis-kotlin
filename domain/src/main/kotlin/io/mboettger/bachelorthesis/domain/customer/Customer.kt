@@ -5,8 +5,8 @@ import io.mboettger.bachelorthesis.domain.customer.address.Address
 
 data class Customer(
     override val id: String,
-    val name: Name,
-    val surName: SurName,
+    val firstName: FirstName,
+    val lastName: LastName,
     val address: Address,
     val phoneNumber: PhoneNumber? = null,
     val emailAddress: EmailAddress? = null,

@@ -1,8 +1,8 @@
 package io.mboettger.bachelorthesis.starter.context
 
 import io.mboettger.bachelorthesis.domain.customer.Customer
-import io.mboettger.bachelorthesis.domain.customer.Name
-import io.mboettger.bachelorthesis.domain.customer.SurName
+import io.mboettger.bachelorthesis.domain.customer.FirstName
+import io.mboettger.bachelorthesis.domain.customer.LastName
 import io.mboettger.bachelorthesis.domain.customer.address.*
 import io.mboettger.bachelorthesis.persistence.gateway.CustomerGateway
 import io.mboettger.bachelorthesis.persistence.gateway.GatewayFactory
@@ -19,8 +19,8 @@ internal open class TestContext {
     open fun testPersistence(gatewayFactory: GatewayFactory) = CommandLineRunner {
         val customer = Customer(
             id = "",
-            name = Name("Max"),
-            surName = SurName("Mustermann"),
+            firstName = FirstName("Max"),
+            lastName = LastName("Mustermann"),
             address = Address(
                 street = Street("Musterstraße"),
                 houseNumber = HouseNumber("12"),

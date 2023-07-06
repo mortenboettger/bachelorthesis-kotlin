@@ -1,7 +1,7 @@
 package io.mboettger.bachelorthesis.usecase.impl.converter
 
 import io.mboettger.bachelorthesis.domain.customer.address.*
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.customer.model.AddressModel
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.model.AddressModel
 
 internal fun AddressModel.toDomain() = Address(
     street = Street(street),

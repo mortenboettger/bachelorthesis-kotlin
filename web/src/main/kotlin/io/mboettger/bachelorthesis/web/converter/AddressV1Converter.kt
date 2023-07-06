@@ -1,6 +1,6 @@
 package io.mboettger.bachelorthesis.web.converter
 
-import io.mboettger.bachelorthesis.usecase.boundary.useCase.customer.model.AddressModel
+import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.model.AddressModel
 import io.mboettger.bachelorthesis.web.model.AddressV1
 
 internal fun AddressModel.toWebV1() = AddressV1(
