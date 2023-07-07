@@ -6,39 +6,30 @@ import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCu
 import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCustomerResponse
 import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCustomerUseCase
 import io.mboettger.bachelorthesis.usecase.impl.converter.toBoundary
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.error.UseCaseValidationError
 import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.useCase
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.beNull
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.shouldNot
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.shouldNotBe
 
 class ShowCustomerUseCaseImpl(
     private val customerGateway: CustomerGateway
-) : ShowCustomerUseCase by useCase({
-
-    when (request) {
-        is ShowCustomerRequest.ById -> {
-            try {
-                check(request.customerId shouldNot beNull) { "Customer ID can not be empty" }
-            } catch (e: IllegalStateException) {
-                throw UseCaseValidationError(e)
-            }
-
-            customerGateway.findOneOrNull(request.customerId)?.let {
-                ShowCustomerResponse.Success(it.toBoundary())
-            } ?: ShowCustomerResponse.Error.NotFound(request.customerId)
+) : ShowCustomerUseCase by useCase(
+    {
+        when (request) {
+            is ShowCustomerRequest.ById -> check(request.customerId shouldNotBe null) { "Customer ID can not be empty" }
+            is ShowCustomerRequest.ByEmailAddress -> check(request.emailAddress shouldNotBe null) { "E-Mail address can not be empty" }
         }
+    },
+    {
 
-        is ShowCustomerRequest.ByEmailAddress -> {
-            val emailAddress = try {
-                check(request.emailAddress shouldNot beNull) { "E-Mail address can not be empty" }
-                EmailAddress(request.emailAddress)
-            } catch (e: IllegalStateException) {
-                throw UseCaseValidationError(e)
-            }
+        when (request) {
+            is ShowCustomerRequest.ById ->
+                customerGateway.findOneOrNull(request.customerId)?.let {
+                    ShowCustomerResponse.Success(it.toBoundary())
+                } ?: ShowCustomerResponse.Error.NotFound(request.customerId)
 
-            customerGateway.findByEmail(emailAddress)?.let {
-                ShowCustomerResponse.Success(it.toBoundary())
-            } ?: ShowCustomerResponse.Error.NotFound(request.emailAddress)
+            is ShowCustomerRequest.ByEmailAddress ->
+                customerGateway.findByEmail(EmailAddress(request.emailAddress))?.let {
+                    ShowCustomerResponse.Success(it.toBoundary())
+                } ?: ShowCustomerResponse.Error.NotFound(request.emailAddress)
         }
     }
-})
+)

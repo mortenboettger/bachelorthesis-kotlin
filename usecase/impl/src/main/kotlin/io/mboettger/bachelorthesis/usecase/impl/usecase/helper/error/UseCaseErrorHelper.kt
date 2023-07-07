@@ -32,13 +32,11 @@ internal object UseCaseErrorHelper {
 
         val validationCtor = if (useCaseResponseErrorClass.isSealed) {
             useCaseResponseErrorClass.sealedSubclasses.mapNotNull {
-                // map class references ValidationErrors alias
-                findCtorByParamClass(it, Map::class)
+                findCtorByParamClass(it, String::class)
             }
         } else {
             listOfNotNull(
-                // map class references ValidationErrors alias
-                findCtorByParamClass(useCaseResponseErrorClass, Map::class)
+                findCtorByParamClass(useCaseResponseErrorClass, String::class)
             )
         }
 

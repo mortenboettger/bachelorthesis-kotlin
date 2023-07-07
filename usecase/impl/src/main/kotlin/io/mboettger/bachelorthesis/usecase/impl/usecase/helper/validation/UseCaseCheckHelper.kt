@@ -6,4 +6,6 @@ internal infix fun <T> T?.shouldNot(callable: (T) -> Boolean): Boolean = !should
 
 internal infix fun <T : CharSequence> T?.shouldMatch(regex: Regex): Boolean = this?.matches(regex) ?: false
 
-internal val beNull = { value: Any? -> value == null }
+internal infix fun <T> T?.shouldBe(value: T?): Boolean = this == value
+
+internal infix fun <T> T?.shouldNotBe(value: T?): Boolean = this != value

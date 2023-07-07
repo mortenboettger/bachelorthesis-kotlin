@@ -7,20 +7,18 @@ import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.create.Crea
 import io.mboettger.bachelorthesis.usecase.impl.converter.toDomain
 import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.error.UseCaseValidationError
 import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.useCase
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.beNull
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.should
-import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.shouldMatch
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.*
 import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.shouldNot
 
 internal class CreateCustomerUseCaseImpl(
     private val customerGateway: CustomerGateway
-) : CreateCustomerUseCase by useCase({
-
-    val customer = try {
+) : CreateCustomerUseCase by useCase(
+    {
         check(request.emailAddress?.let { EmailAddress(it) } shouldNot customerGateway::existsByEmail) { "${request.emailAddress} already in use" }
-        check(request.phoneNumber should beNull || request.phoneNumber shouldMatch Regex("^\\+?[1-9][0-9\\-]+\$")) { "Malformed phone-number" }
-
-        Customer(
+        check(request.phoneNumber shouldBe null || request.phoneNumber shouldMatch Regex("^\\+?[1-9][0-9\\-]+\$")) { "Malformed phone-number" }
+    },
+    {
+        val customer = Customer(
             id = "",
             firstName = FirstName(request.firstName),
             lastName = LastName(request.lastName),
@@ -28,11 +26,9 @@ internal class CreateCustomerUseCaseImpl(
             phoneNumber = request.phoneNumber?.let { PhoneNumber(it.replace("-", "")) },
             emailAddress = request.emailAddress?.let { EmailAddress(it) },
         )
-    } catch (e: IllegalStateException) {
-        throw UseCaseValidationError(e)
-    }
 
-    CreateCustomerResponse.Success(
-        customerGateway.save(customer).id
-    )
-})
+        CreateCustomerResponse.Success(
+            customerGateway.save(customer).id
+        )
+    }
+)
