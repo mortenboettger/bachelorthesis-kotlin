@@ -22,9 +22,7 @@ internal object UseCaseErrorHelper {
         }
 
         return errorCtor.firstOrNull()?.call(error).also {
-            if (it !is UseCaseUnknownErrorContainer) {
-                throw IllegalStateException("An unknown error use case response class must implement ${UseCaseUnknownErrorContainer::class.simpleName}")
-            }
+            check(it is UseCaseUnknownErrorContainer) { "An unknown error use case response class must implement ${UseCaseUnknownErrorContainer::class.simpleName}" }
         }
             ?: throw IllegalStateException("Unable to construct unknown error response class because ${useCaseResponseErrorClass.qualifiedName} does not have a constructor with a single parameter of type ${Throwable::class.simpleName}")
 
@@ -53,7 +51,10 @@ internal object UseCaseErrorHelper {
 
     }
 
-    private fun <T : UseCaseResponse<T>> findCtorByParamClass(clazz: KClass<out T>, paramClass: KClass<*>): KFunction<T>? {
+    private fun <T : UseCaseResponse<T>> findCtorByParamClass(
+        clazz: KClass<out T>,
+        paramClass: KClass<*>
+    ): KFunction<T>? {
         return clazz.constructors.firstOrNull() {
             it.parameters.firstOrNull()?.type?.jvmErasure == paramClass
         }
