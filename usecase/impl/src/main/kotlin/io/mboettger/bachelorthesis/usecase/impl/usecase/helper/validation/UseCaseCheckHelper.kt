@@ -1,5 +1,7 @@
 package io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation
 
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.error.UseCaseValidationError
+
 internal infix fun <T> T?.should(callable: (T) -> Boolean): Boolean = this?.let { callable(it) } ?: false
 
 internal infix fun <T> T?.shouldNot(callable: (T) -> Boolean): Boolean = !should(callable)

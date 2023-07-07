@@ -6,7 +6,10 @@ import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCu
 import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCustomerResponse
 import io.mboettger.bachelorthesis.usecase.boundary.usecase.customer.show.ShowCustomerUseCase
 import io.mboettger.bachelorthesis.usecase.impl.converter.toBoundary
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.error.UseCaseValidationError
 import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.useCase
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.beNull
+import io.mboettger.bachelorthesis.usecase.impl.usecase.helper.validation.shouldNot
 
 class ShowCustomerUseCaseImpl(
     private val customerGateway: CustomerGateway
@@ -14,13 +17,26 @@ class ShowCustomerUseCaseImpl(
 
     when (request) {
         is ShowCustomerRequest.ById -> {
+            try {
+                check(request.customerId shouldNot beNull) { "Customer ID can not be empty" }
+            } catch (e: IllegalStateException) {
+                throw UseCaseValidationError(e)
+            }
+
             customerGateway.findOneOrNull(request.customerId)?.let {
                 ShowCustomerResponse.Success(it.toBoundary())
             } ?: ShowCustomerResponse.Error.NotFound(request.customerId)
         }
 
         is ShowCustomerRequest.ByEmailAddress -> {
-            customerGateway.findByEmail(EmailAddress(request.emailAddress))?.let {
+            val emailAddress = try {
+                check(request.emailAddress shouldNot beNull) { "E-Mail address can not be empty" }
+                EmailAddress(request.emailAddress)
+            } catch (e: IllegalStateException) {
+                throw UseCaseValidationError(e)
+            }
+
+            customerGateway.findByEmail(emailAddress)?.let {
                 ShowCustomerResponse.Success(it.toBoundary())
             } ?: ShowCustomerResponse.Error.NotFound(request.emailAddress)
         }
